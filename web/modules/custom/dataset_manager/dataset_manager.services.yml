@@ -1,0 +1,3 @@
+services:
+  dataset_manager.parser:
+    class: Drupal\dataset_manager\Service\DatasetParserService

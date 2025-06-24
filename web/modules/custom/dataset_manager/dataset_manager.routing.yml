@@ -1,0 +1,7 @@
+dataset_manager.upload:
+  path: '/dataset/upload'
+  defaults:
+    _form: '\Drupal\dataset_manager\Form\DatasetUploadForm'
+    _title: 'Upload Dataset'
+  requirements:
+    _permission: 'access content'

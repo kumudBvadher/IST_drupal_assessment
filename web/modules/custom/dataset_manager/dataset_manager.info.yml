@@ -1,0 +1,7 @@
+name: 'Dataset Manager'
+type: module
+description: 'AI-enhanced Dataset Upload and Metadata Processing'
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - file

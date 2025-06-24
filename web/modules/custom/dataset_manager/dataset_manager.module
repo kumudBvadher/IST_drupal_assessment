@@ -1,0 +1,15 @@
+<?php
+
+function dataset_manager_theme($existing, $type, $theme, $path) {
+  return [
+    'dataset_summary' => [
+      'variables' => [
+        'filename' => NULL,
+        'filesize' => NULL,
+        'columns' => [],
+        'rows' => 0,
+      ],
+      'template' => 'dataset-summary',
+    ],
+  ];
+}
