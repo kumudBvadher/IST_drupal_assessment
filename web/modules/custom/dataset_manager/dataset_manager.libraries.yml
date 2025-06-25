@@ -1,0 +1,17 @@
+dragdrop:
+  version: 1.x
+  css:
+    theme:
+      css/dropzone-style.css: {}
+  js:
+    js/dragdrop.js: {}
+  dependencies:
+    - core/jquery
+    
+metadata_autosave:
+  js:
+    js/metadata_autosave.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupal.ajax

@@ -1,0 +1,71 @@
+#drop-area {
+  border: 2px dashed #0074d9;
+  border-radius: 8px;
+  padding: 40px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 16px;
+  color: #333;
+  background-color: #f8f9fa;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+#drop-area:hover {
+  background-color: #e6f7ff;
+}
+
+#file-info {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #2e2e2e;
+  text-align: center;
+}
+
+#upload-progress {
+  margin: 15px auto;
+  width: 80%;
+  max-width: 400px;
+  background: #e9ecef;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#upload-progress div {
+  background: #0074d9;
+  height: 20px;
+  width: 0;
+  transition: width 0.4s ease;
+}
+
+.dataset-summary {
+  background: #ffffff;
+  padding: 25px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  max-width: 700px;
+  margin: 30px auto;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+}
+
+.dataset-summary h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.dataset-summary ul {
+  list-style: none;
+  padding: 0;
+}
+
+.dataset-summary li {
+  padding: 8px 0;
+  font-size: 16px;
+  border-bottom: 1px dashed #eee;
+}
+
+.dataset-summary li:last-child {
+  border-bottom: none;
+}

@@ -1,3 +1,7 @@
 services:
   dataset_manager.parser:
     class: Drupal\dataset_manager\Service\DatasetParserService
+    arguments: ['@file_system', '@logger.channel.default']
+  dataset_manager.ai:
+    class: Drupal\dataset_manager\Service\AIMetadataService
+    arguments: ['@http_client']

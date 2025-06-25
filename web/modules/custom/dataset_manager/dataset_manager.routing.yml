@@ -1,7 +1,34 @@
-dataset_manager.upload:
+dataset_manager.upload_form:
   path: '/dataset/upload'
   defaults:
     _form: '\Drupal\dataset_manager\Form\DatasetUploadForm'
     _title: 'Upload Dataset'
   requirements:
     _permission: 'access content'
+
+dataset_manager.summary:
+  path: '/dataset/summary/{dataset}'
+  defaults:
+    _controller: '\Drupal\dataset_manager\Controller\DatasetSummaryController::view'
+    _title: 'Dataset Summary'
+  requirements:
+    _permission: 'access content'
+
+dataset_manager.upload_ajax:
+  path: '/dataset/upload/ajax'
+  defaults:
+    _controller: '\Drupal\dataset_manager\Controller\UploadAjaxController::upload'
+    _title: 'Dataset Upload'
+  requirements:
+    _permission: 'access content'
+
+dataset_manager.metadata_edit:
+  path: '/dataset/{dataset}/edit-metadata'
+  defaults:
+    _form: '\Drupal\dataset_manager\Form\MetadataEditForm'
+    _title: 'Edit Metadata'
+  requirements:
+    _permission: 'access content'
+
+  
+

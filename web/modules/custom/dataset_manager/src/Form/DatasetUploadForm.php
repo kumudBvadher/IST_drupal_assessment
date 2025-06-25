@@ -27,77 +27,87 @@ class DatasetUploadForm extends FormBase {
   }
 
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['upload'] = [
-      '#type' => 'managed_file',
-      '#title' => $this->t('Upload Dataset (CSV/XLSX)'),
-      '#upload_location' => 'public://datasets/',
-      '#upload_validators' => [
-        'file_validate_extensions' => ['csv xlsx'],
-      ],
-      '#required' => TRUE,
-    ];
+  $form['drop_area'] = [
+    '#markup' => '<div id="drop-area" style="border: 2px dashed #aaa; padding: 30px; text-align: center; margin-bottom: 20px;">
+                    <strong>Drag & Drop your file here</strong><br>
+                    <em>(Only .csv or .xlsx files, max 5MB)</em>
+                  </div>
+                  <div id="file-info" style="margin-top: 10px;"></div>',
+  ];
+  $form['actions']['submit'] = [
+    '#type' => 'submit',
+    '#value' => $this->t('Upload'),
+  ];
 
-    $form['actions'] = [
-      '#type' => 'actions',
+  if ($summary = $form_state->get('summary')) {
+    $form['summary'] = [
+      '#theme' => 'dataset_summary',
+      '#filename' => $summary['filename'],
+      '#filesize' => $summary['filesize'],
+      '#columns' => $summary['columns'],
+      '#rows' => $summary['rows'],
     ];
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Upload & Analyze'),
-    ];
-
-    // Check if we have a parsed summary to display
-    if ($summary = $form_state->get('summary')) {
-      $form['summary'] = [
-        '#theme' => 'dataset_summary',
-        '#filename' => $summary['filename'],
-        '#filesize' => $summary['filesize'],
-        '#columns' => $summary['columns'],
-        '#rows' => $summary['rows'],
-      ];
+    if ($dataset_id = $form_state->get('dataset_id')) {
+        $form['analyse'] = [
+            '#type' => 'link',
+            '#title' => $this->t('Analyse Dataset'),
+            '#url' => \Drupal\Core\Url::fromUri("internal:/dataset/{$dataset_id}/edit-metadata"),
+            '#attributes' => [
+            'class' => ['button', 'button--primary'],
+            'style' => 'margin-top: 20px;',
+            ],
+        ];
     }
 
-    return $form;
+  }
+  $form['#attached']['library'][] = 'dataset_manager/dropzone-style';
+  $form['#attached']['library'][] = 'dataset_manager/dragdrop';
+
+  return $form;
+}
+
+
+public function submitForm(array &$form, FormStateInterface $form_state) {
+  $fid = \Drupal::service('tempstore.private')->get('dataset_manager')->get('uploaded_fid');
+
+  if (!$fid || !$file = File::load($fid)) {
+    $this->messenger()->addError($this->t('No uploaded file found.'));
+    return;
   }
 
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    $fid = $form_state->getValue('upload')[0];
-    $file = File::load($fid);
+  $file->setPermanent();
+  $file->save();
 
-    if (!$file) {
-      $this->messenger()->addError($this->t('Uploaded file could not be loaded.'));
-      return;
-    }
+  try {
+    $summary = $this->parser->parse($file);
 
-    $file->setPermanent();
-    $file->save();
+    $dataset = \Drupal::entityTypeManager()->getStorage('dataset')->create([
+      'filename' => $file->getFilename(),
+      'filesize' => $file->getSize(),
+      'columns' => implode(', ', $summary['columns']),
+      'rows' => $summary['rows'],
+    ]);
+    $dataset->save();
 
-    try {
-      $summary = $this->parser->parse($file);
+    $this->messenger()->addStatus($this->t('File uploaded and analyzed successfully.'));
 
-      // Save dataset entity.
-      $dataset = \Drupal::entityTypeManager()->getStorage('dataset')->create([
-        'filename' => $file->getFilename(),
-        'filesize' => $file->getSize(),
-        'columns' => implode(', ', $summary['columns']),
-        'rows' => $summary['rows'],
-      ]);
-      $dataset->save();
+    $form_state->set('summary', [
+    'filename' => $file->getFilename(),
+    'filesize' => $file->getSize(),
+    'columns' => $summary['columns'],
+    'rows' => $summary['rows'],
+    ]);
+    $form_state->set('dataset_id', $dataset->id());
+    $form_state->setRebuild(TRUE);
 
-      // Show feedback and summary.
-      $this->messenger()->addStatus($this->t('File uploaded and analyzed successfully.'));
+    // Clear the session
+    \Drupal::service('tempstore.private')->get('dataset_manager')->delete('uploaded_fid');
 
-      $form_state->set('summary', [
-        'filename' => $file->getFilename(),
-        'filesize' => $file->getSize(),
-        'columns' => $summary['columns'],
-        'rows' => $summary['rows'],
-      ]);
-      $form_state->setRebuild(TRUE);
-
-    } catch (\Exception $e) {
-      $this->messenger()->addError($this->t('Failed to parse file: @error', [
-        '@error' => $e->getMessage(),
-      ]));
-    }
+  } catch (\Exception $e) {
+    $this->messenger()->addError($this->t('Failed to parse file: @error', [
+      '@error' => $e->getMessage(),
+    ]));
   }
+}
+
 }
