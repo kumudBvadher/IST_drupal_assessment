@@ -1,41 +1,77 @@
-# Mini-Task 1: Dataset Upload (Basic)
+Local setup( DOCKER DDEV)
+==============================
+install ddev from https://ddev.readthedocs.io/en/stable/users/install/ddev-installation/#ddev-installation-windows
 
-This custom Drupal module provides a simple file upload form that validates and displays basic information about the uploaded file.
+After installation Run this
 
-## Features
+choco install ddev -y
+ddev --veresion
 
-- Standard Drupal form with file input (no Dropzone.js)
-- Validates file extensions ('.csv', '.xlsx')
-- Displays:
-  - File name
-  - File size (in KB)
-  - File MIME type
-- Includes basic 'try/catch' error handling
-
-## How It Works
-
-1. **Form Setup**
-   - Built using Drupal Form API ('FormBase' or 'FormStateInterface')
-   - File upload handled via 'file_save_upload()'
-
-2. **Validation**
-   - Checks if file is uploaded
-   - Ensures extension is '.csv' or '.xlsx'
-   - If invalid, shows a form error
-
-3. **On Submit**
-   - Displays file metadata (name, size, MIME type)
-   - All logic wrapped in 'try/catch' for safe error handling
-
-4. **No Permanent File Storage**
-   - File is uploaded temporarily for inspection only
-   - No custom entities or database interaction
-
-## Sample Output
-![image](https://github.com/user-attachments/assets/2fc960aa-4fb2-4b2e-b2e6-051fe0689b94)
+Clone this repo and cd to folder 
+     git clone https://github.com/kumudBvadher/IST_drupal_assessment.git
 
 
-After submission, the following details are shown:
+ddev config
 
-![alt text](image.png)
+ddev start 
+install Composer
+ddev composer install
+ddev composer require drupal/drush
 
+ddev import-db --src=<filepath>
+
+
+
+
+AI-Enhanced Dataset Publishing Platform
+=======================================
+
+This is a custom Drupal 10+ project that allows users to upload datasets (CSV/XLSX), automatically generate multilingual metadata using AI , and manage publishing workflows with revisioning and dashboards.
+
+Module: dataset_manager
+-----------------------
+
+Main functionality includes:
+
+- Upload CSV/XLSX files
+- Display file summary (columns, rows, size)
+- Auto-generate title, description, tags using mocked AI
+- English & Arabic support using Drupal translation
+- Metadata editor with revision tracking
+- Content moderation workflow
+- Supervisor dashboard with filters (Views)
+
+
+Test Credentials
+----------------
+
+| Role       | Username   | Password |
+|------------|------------|----------|
+| Admin       admin       Admin@123
+| Supervisor  supervisor  Admin@123
+| Contributor   Contributor    pass123  
+
+AI API Configuration (Mocked)
+-----------------------------
+
+Configure your API key in 'settings.php':
+
+'''php
+$settings['openai_api_key'] = 'mocked-key';
+'''
+
+Multilingual Setup
+------------------
+
+1. Enable Arabic at '/admin/config/regional/language'.
+2. Enable translation for Dataset fields under '/admin/config/regional/content-language'.
+3. Use the language switcher in your theme to switch between English and Arabic.
+
+Useful Admin URLs
+-----------------
+
+- Dataset Upload: '/dataset-upload'
+- Metadata Editor: '/metadata/edit/{dataset_id}'
+- Dataset Dashboard (Views): '/admin/content/datasets'
+- Moderation Workflows: '/admin/config/workflow/workflows'
+- User Roles & Permissions: '/admin/people/roles'
