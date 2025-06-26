@@ -18,7 +18,7 @@ install Composer
 ddev composer install
 ddev composer require drupal/drush
 
-ddev import-db --src=<filepath>
+ddev import-db --file=<filepath>
 
 
 
