@@ -21,8 +21,24 @@ ddev composer require drupal/drush
 
 ddev import-db --file=<filepath>
 
+AI API Configuration
+-----------------------------
 
+Configure your API key in 'settings.php':
 
+'''php
+          
+          $settings['openai_api_key'] = 'mocked-key';
+'''
+
+Useful Admin URLs
+-----------------
+
+- Dataset Upload: '/dataset/upload'
+- Metadata Editor: 'dataset/{datase-id}/edit-metadata'
+- Dataset Dashboard (Views): '/admin/content/datasets'
+- User Roles & Permissions: '/admin/people/roles'
+  
 
 AI-Enhanced Dataset Publishing Platform
 =======================================
@@ -52,14 +68,7 @@ Test Credentials
 | Supervisor  supervisor  Admin@123
 | Contributor   Contributor    Admin@123  
 
-AI API Configuration (Mocked)
------------------------------
 
-Configure your API key in 'settings.php':
-
-'''php
-$settings['openai_api_key'] = 'mocked-key';
-'''
 
 Multilingual Setup
 ------------------
@@ -68,10 +77,4 @@ Multilingual Setup
 2. Enable translation for Dataset fields under '/admin/config/regional/content-language'.
 3. Use the language switcher in your theme to switch between English and Arabic.
 
-Useful Admin URLs
------------------
 
-- Dataset Upload: '/dataset/upload'
-- Metadata Editor: 'dataset/{datase-id}/edit-metadata'
-- Dataset Dashboard (Views): '/admin/content/datasets'
-- User Roles & Permissions: '/admin/people/roles'
