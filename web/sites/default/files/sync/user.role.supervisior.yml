@@ -1,0 +1,16 @@
+uuid: 893be58a-7db6-4f9c-a2fe-778be7596278
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflows.workflow.dataset_workflow
+  module:
+    - content_moderation
+id: supervisior
+label: Supervisor
+weight: 4
+is_admin: null
+permissions:
+  - 'use dataset_workflow transition approve'
+  - 'use dataset_workflow transition request_changes'
+  - 'use dataset_workflow transition unpublished'

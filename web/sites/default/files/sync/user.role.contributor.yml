@@ -1,0 +1,14 @@
+uuid: 365f13ab-2673-4d1f-9311-bc327e16b6cb
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflows.workflow.dataset_workflow
+  module:
+    - content_moderation
+id: contributor
+label: Contributor
+weight: 5
+is_admin: null
+permissions:
+  - 'use dataset_workflow transition submit_for_review'
