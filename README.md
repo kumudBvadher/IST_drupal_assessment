@@ -70,8 +70,7 @@ Multilingual Setup
 Useful Admin URLs
 -----------------
 
-- Dataset Upload: '/dataset-upload'
-- Metadata Editor: '/metadata/edit/{dataset_id}'
+- Dataset Upload: '/dataset/upload'
+- Metadata Editor: 'dataset/{datase-id}/edit-metadata'
 - Dataset Dashboard (Views): '/admin/content/datasets'
-- Moderation Workflows: '/admin/config/workflow/workflows'
 - User Roles & Permissions: '/admin/people/roles'
