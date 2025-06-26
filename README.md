@@ -50,7 +50,7 @@ Test Credentials
 |------------|------------|----------|
 | Admin       admin       Admin@123
 | Supervisor  supervisor  Admin@123
-| Contributor   Contributor    pass123  
+| Contributor   Contributor    Admin@123  
 
 AI API Configuration (Mocked)
 -----------------------------
