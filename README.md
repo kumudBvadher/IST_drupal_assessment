@@ -7,9 +7,10 @@ After installation Run this
 choco install ddev -y
 ddev --veresion
 
-Clone this repo and cd to folder 
-     git clone https://github.com/kumudBvadher/IST_drupal_assessment.git
+Clone this repo :
 
+     git clone https://github.com/kumudBvadher/IST_drupal_assessment.git
+>cd IST_drupal_assessment;
 
 ddev config
 
