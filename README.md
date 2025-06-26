@@ -13,7 +13,12 @@ Clone this repo :
 >cd IST_drupal_assessment;
 
 ddev config
-
+     you will be asked for root location type "web"
+               
+               Docroot Location (.): web
+               Project Type [backdrop, cakephp, craftcms, drupal, drupal6, drupal7, drupal8, drupal9, drupal10, drupal11, generic, laravel, magento, magento2, php,           shopware6, silverstripe, symfony, typo3, wordpress] (drupal10): drupal10
+               
+and then 
 ddev start 
 install Composer
 ddev composer install
