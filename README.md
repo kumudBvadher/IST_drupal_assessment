@@ -80,8 +80,9 @@ Multilingual Setup
 
 1. Enable Arabic at '/admin/config/regional/language'.
 2. Enable translation for Dataset fields under '/admin/config/regional/content-language'.
-3. Use the language switcher in your theme to switch[Upload Dataset _ IST Drupal Assessment.webm](https://github.com/user-attachments/assets/89206430-10ce-43a7-a445-3e014a684b02)
- between English and Arabic.
+
+Demo Video
+[Upload Dataset _ IST Drupal Assessment.webm](https://github.com/user-attachments/assets/89206430-10ce-43a7-a445-3e014a684b02)
 
 
 
